@@ -23,7 +23,7 @@ async function main() {
     ChannelId: process.env.CHANNEL_ID!,
     SalaiToken: process.env.SALAI_TOKEN!,
     Debug: true,
-    Ws: false,
+    Ws: true,
   });
   console.log("SALAI_TOKEN:", process.env.SALAI_TOKEN?.slice(0,5));
   console.log("SERVER_ID:", process.env.SERVER_ID?.slice(-5));
