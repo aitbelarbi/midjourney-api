@@ -25,9 +25,9 @@ async function main() {
     Debug: true,
     Ws: false,
   });
-  console.log("SALAI_TOKEN:", process.env.SALAI_TOKEN);
-  console.log("SERVER_ID:", process.env.SERVER_ID);
-  console.log("CHANNEL_ID:", process.env.CHANNEL_ID);
+  console.log("SALAI_TOKEN:", process.env.SALAI_TOKEN?.slice(0,5));
+  console.log("SERVER_ID:", process.env.SERVER_ID?.slice(0,5));
+  console.log("CHANNEL_ID:", process.env.CHANNEL_ID?.slice(0,5));
 
   // Boucle sur chaque titre pour générer l'image
   for (const item of data) {
