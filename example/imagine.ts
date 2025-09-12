@@ -60,7 +60,7 @@ main().catch((err) => {
 });
 
 
-/**
+/***
  *
  * a simple example of how to use the imagine command
  * ```
