@@ -25,6 +25,9 @@ async function main() {
     Debug: true,
     Ws: false,
   });
+  console.log("SALAI_TOKEN present?", !!process.env.SALAI_TOKEN);
+  console.log("SERVER_ID present?", !!process.env.SERVER_ID);
+  console.log("CHANNEL_ID present?", !!process.env.CHANNEL_ID);
 
   // Boucle sur chaque titre pour générer l'image
   for (const item of data) {
