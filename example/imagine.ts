@@ -17,11 +17,12 @@ async function main() {
   });
 
   const msg = await client.Imagine(
-    "Red hamster",
+    "chicken recipe",
     (uri: string, progress: string) => {
       console.log("loading", uri, "progress", progress);
     }
   );
+  console.log("finish");
   console.log(JSON.stringify(msg));
 }
 main().catch((err) => {
