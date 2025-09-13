@@ -40,9 +40,10 @@ async function main() {
       // Récupérer le hash ou l'identifiant de l'image
       const hash = msg[0]?.hash || msg?.hash;
       if (hash) {
-        const imageUrl = `https://cdn.midjourney.com/${hash}/0_0.png`;
-        item.urls.push(imageUrl);
-        console.log(`✅ Image generated for "${item.title}": ${imageUrl}`);
+        item.urls.push(
+          ...[0, 1, 2, 3].map(i => `https://cdn.midjourney.com/${hash}/0_${i}.webp`)
+        );
+        console.log(`✅ Image generated for "${item.title}": ${item.urls}`);
   
         // Sauvegarder immédiatement le JSON après cette image
         fs.writeFileSync(FILE_PATH, JSON.stringify(data, null, 2), "utf-8");
