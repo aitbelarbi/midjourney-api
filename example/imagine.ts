@@ -39,12 +39,41 @@ async function main() {
   
       // Récupérer le hash ou l'identifiant de l'image
       const hash = msg[0]?.hash || msg?.hash;
+      const msgId = msg[0]?.id || msg?.id;
+      const msgFlags = msg[0]?.flags || msg?.flags;
+      const msgContent = msg[0]?.content || msg?.content;
+
       if (hash) {
         item.urls.push(
           ...[0, 1, 2, 3].map(i => `https://cdn.midjourney.com/${hash}/0_${i}.webp`)
         );
         console.log(`✅ Image generated for "${item.title}": ${item.urls}`);
   
+        const msg2 = await client.Upscale({
+          index: 2,
+          msgId,
+          hash,
+          flags: msgFlags,
+          content: msgContent,
+          loading: (uri: string, progress: string) => {
+            console.log("loading image Pinterest", uri, "progress", progress);
+          },
+        });
+  
+        console.log("message 2 : ", msg2);
+  
+        // 🔹 Construire l’URL Pinterest
+        if (msg2?.proxy_url) {
+          const pinterestUrl = `${msg2.proxy_url}&format=webp&quality=lossless&width=1000&height=1500`;
+  
+          // Ajouter au JSON
+          (item as any).pinterestImage = pinterestUrl;
+  
+          console.log(`📌 Pinterest image added for "${item.title}": ${pinterestUrl}`);
+        } else {
+          console.warn(`⚠️ No proxy_url found for "${item.title}"`);
+        }
+
         // Sauvegarder immédiatement le JSON après cette image
         fs.writeFileSync(FILE_PATH, JSON.stringify(data, null, 2), "utf-8");
         console.log(`💾 JSON updated after "${item.title}"`);
