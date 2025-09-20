@@ -13,8 +13,10 @@ async function main() {
     process.exit(1);
   }
 
-  // Charger le JSON
-  const data: { title: string; urls: string[] }[] = JSON.parse(fs.readFileSync(FILE_PATH, "utf-8"));
+  const raw = fs.readFileSync(FILE_PATH, "utf-8");
+  console.log("🔍 Raw file content:");
+  console.log(raw.slice(0, 500)); // affiche les 500 premiers caractères
+  const data: { title: string; urls: string[] }[] = JSON.parse(raw);
   console.log("Loaded data:", data);
 
   // Créer le client Midjourney
