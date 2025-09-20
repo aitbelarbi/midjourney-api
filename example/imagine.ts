@@ -25,6 +25,8 @@ async function main() {
     ChannelId: process.env.CHANNEL_ID!,
     SalaiToken: process.env.SALAI_TOKEN!,
     Debug: true,
+    ApiInterval: 500,
+    Limit: 120,
     Ws: false,
   });
   console.log("SALAI_TOKEN:", process.env.SALAI_TOKEN?.slice(0,5));
@@ -66,7 +68,7 @@ async function main() {
   
         // 🔹 Construire l’URL Pinterest
         if (msg2?.proxy_url) {
-          const pinterestUrl = `${msg2.proxy_url}&format=webp&quality=lossless&width=1000&height=1500`;
+          const pinterestUrl = `${msg2.proxy_url}&format=jpeg&quality=lossless&width=1000&height=1500`;
   
           // Ajouter au JSON
           (item as any).pinterestImage = pinterestUrl;

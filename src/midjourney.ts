@@ -68,6 +68,8 @@ export class Midjourney extends MidjourneyMessage {
     const httpStatus = await this.MJApi.ImagineApi(prompt, nonce);
     if (httpStatus !== 204) {
       throw new Error(`ImagineApi failed with status ${httpStatus}`);
+    } else {
+      console.log("✅ Message envoyé à Discord !");
     }
     if (this.wsClient) {
       return await this.wsClient.waitImageMessage({ nonce, loading, prompt });
