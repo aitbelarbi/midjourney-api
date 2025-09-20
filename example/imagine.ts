@@ -25,7 +25,6 @@ async function main() {
     ChannelId: process.env.CHANNEL_ID!,
     SalaiToken: process.env.SALAI_TOKEN!,
     Debug: true,
-    ApiInterval: 500,
     Limit: 120,
     Ws: false,
   });
