@@ -5,6 +5,10 @@ import path from "path";
 
 const FILE_PATH = path.join(__dirname, "../../scripts/titles.json");
 
+function sleep(ms: number) {
+  return new Promise(resolve => setTimeout(resolve, ms));
+}
+
 async function main() {
   // Vérifier que le JSON existe
   console.log("Looking for file at:", FILE_PATH);
@@ -50,7 +54,9 @@ async function main() {
           ...[0, 1, 2, 3].map(i => `https://cdn.midjourney.com/${hash}/0_${i}.webp`)
         );
         console.log(`✅ Image generated for "${item.title}": ${item.urls}`);
-  
+        
+        await sleep(2000);
+
         const msg2 = await client.Upscale({
           index: 2,
           msgId,
@@ -79,6 +85,7 @@ async function main() {
         // Sauvegarder immédiatement le JSON après cette image
         fs.writeFileSync(FILE_PATH, JSON.stringify(data, null, 2), "utf-8");
         console.log(`💾 JSON updated after "${item.title}"`);
+        await sleep(2000);
       } else {
         console.warn(`⚠️ No hash returned for "${item.title}"`);
       }
